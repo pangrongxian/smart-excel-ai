@@ -33,7 +33,10 @@ export const authOptions: NextAuthOptions = {
     }),
     GoogleProvider({
       clientId: `${process.env.GOOGLE_ID}`,
-      clientSecret: `${process.env.GOOGLE_SECRET}`
+      clientSecret: `${process.env.GOOGLE_SECRET}`,
+      httpOptions: {
+        timeout: 50000,
+      },
     }),
   ],
   callbacks: {

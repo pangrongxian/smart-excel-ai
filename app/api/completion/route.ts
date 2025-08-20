@@ -7,13 +7,9 @@ import { NextRequest } from 'next/server';
 // import { Configuration, OpenAIApi } from 'openai-edge'; // runtime = 'edge'
 import OpenAI from 'openai';
 
-// runtime = 'edge'
-// const config = new Configuration({
-//   apiKey: process.env.OPENAI_API_KEY,
-// });
-// const openai = new OpenAIApi(config);
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+  baseURL: process.env.DEEPSEEK_API_BASE || 'https://api.deepseek.com',
 });
 
 // Set the runtime to edge for best performance
@@ -53,7 +49,7 @@ export async function POST(req: NextRequest) {
   // Ask OpenAI for a streaming completion given the prompt
   // const response = await openai.createChatCompletion({ // runtime = 'edge'
   const response = await openai.chat.completions.create({
-    model: 'gpt-3.5-turbo',
+    model: 'deepseek-chat',  // 改为DeepSeek的模型
     stream: true,
     messages: [
       {
