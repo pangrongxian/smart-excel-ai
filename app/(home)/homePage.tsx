@@ -53,7 +53,7 @@ export default function HomePage({
     headers: {
       token: user?.accessToken || "",
     },
-    onResponse: (res) => {
+    onResponse: (res: Response) => {
       if (res.status === 429) {
         toast.error("You are being rate limited. Please try again later.");
         return;
