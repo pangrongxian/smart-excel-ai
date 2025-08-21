@@ -6,9 +6,9 @@ import { Mdx } from "@/components/mdx/mdx-components";
 import "@/styles/mdx.css";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string[];
-  };
+  }>;
 }
 
 async function getPageFromParams(params: { slug: string[] }) {
@@ -16,20 +16,21 @@ async function getPageFromParams(params: { slug: string[] }) {
   const page = allPosts.find((page) => page.slugAsParams === slug);
 
   if (!page) {
-    null;
+    return null;
   }
 
   return page;
 }
 
-export async function generateStaticParams(): Promise<PageProps["params"][]> {
+export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
   return allPosts.map((page) => ({
-    slug: page.slugAsParams?.split("/"),
+    slug: page.slugAsParams?.split("/") || [],
   }));
 }
 
 export default async function PagePage({ params }: PageProps) {
-  const page = await getPageFromParams(params);
+  const resolvedParams = await params;
+  const page = await getPageFromParams(resolvedParams);
 
   if (!page) {
     notFound();
