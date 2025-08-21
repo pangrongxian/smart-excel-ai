@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/auth/login",
+    signIn: "/login",  // 修改这里
     signOut: '/auth/logout',
   },
   providers: [
