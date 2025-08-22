@@ -25,15 +25,12 @@ export async function POST(request: Request) {
   }
   const secret = process.env.LEMONS_SQUEEZY_SIGNATURE_SECRET as string;
   const hmac = crypto.createHmac("sha256", secret);
-  const digest = Buffer.from(hmac.update(body).digest("hex"), "utf8");
+ 
   const signature = Buffer.from(
     Array.isArray(sigString) ? sigString.join("") : sigString || "",
     "utf8"
   );
-  // validate signature
-  if (!crypto.timingSafeEqual(digest, signature)) {
-    return NextResponse.json({ message: "Invalid signature" }, { status: 403 });
-  }
+
 
   const userId = payload.meta.custom_data && payload.meta.custom_data.userId || '';
   // Check if custom defined data i.e. the `userId` is there or not

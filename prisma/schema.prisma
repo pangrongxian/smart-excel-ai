@@ -8,17 +8,6 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model Dialog {
-  id        Int      @id @default(autoincrement())
-  dialogId  String   @unique
-  prompt    String
-  reply     String
-  userId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  uid       User     @relation(fields: [userId], references: [userId])
-}
-
 model User {
   id               Int      @id @default(autoincrement())
   userId           String?  @unique
@@ -33,5 +22,4 @@ model User {
   currentPeriodEnd Int?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
-  Dialog           Dialog[]
 }
