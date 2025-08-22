@@ -1,8 +1,5 @@
 import Link from "next/link";
-import { BsGithub, BsTwitterX, BsWechat } from "react-icons/bs";
-import { MdEmail } from "react-icons/md";
 
-import { SiBuymeacoffee, SiJuejin } from "react-icons/si";
 
 const ContactMe = () => {
   return (
@@ -13,7 +10,7 @@ const ContactMe = () => {
         rel="noopener norefferer nofollow"
         className="mx-3 flex max-w-[24px] flex-col items-center justify-center"
       >
-        <MdEmail className="text-lg" />
+       
       </Link>
       <Link
         href="https://github.com/weijunext"
@@ -21,7 +18,6 @@ const ContactMe = () => {
         rel="noopener norefferer nofollow"
         className="mx-3 flex max-w-[24px] flex-col items-center justify-center"
       >
-        <BsGithub className="text-lg" />
       </Link>
       <Link
         href="https://x.com/weijunext"
@@ -29,7 +25,7 @@ const ContactMe = () => {
         rel="noopener norefferer nofollow"
         className="mx-3 flex max-w-[24px] flex-col items-center justify-center"
       >
-        <BsTwitterX className="text-lg" />
+      
       </Link>
       <Link
         href="https://juejin.cn/user/26044008768029"
@@ -37,14 +33,14 @@ const ContactMe = () => {
         rel="noopener norefferer nofollow"
         className="mx-3 flex max-w-[24px] flex-col items-center justify-center"
       >
-        <SiJuejin className="text-lg" />
+     
       </Link>
       <Link
         href="https://weijunext.com/make-a-friend"
         target="_blank"
         className="mx-3 flex max-w-[24px] flex-col items-center justify-center"
       >
-        <BsWechat className="text-lg" />
+       
       </Link>
       <Link
         href="https://www.buymeacoffee.com/weijunext"
@@ -52,7 +48,7 @@ const ContactMe = () => {
         rel="noopener norefferer nofollow"
         className="mx-3 flex max-w-[24px] flex-col items-center justify-center"
       >
-        <SiBuymeacoffee className="text-lg" />
+      
       </Link>
     </div>
   );

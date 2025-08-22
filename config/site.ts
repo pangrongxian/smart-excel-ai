@@ -2,8 +2,7 @@ import { SiteConfig } from "@/types/siteConfig"
 
 const baseSiteConfig = {
   name: "Smart Excel",
-  description:
-    "Generate the Excel formulas in seconds.",
+  description: "A modern web application template built with Next.js",
   url: "https://smartexcel.cc",
   ogImage: "https://smartexcel.cc/og.jpg",
   metadataBase: new URL("https://www.smartexcel.cc"),
