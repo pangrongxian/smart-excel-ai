@@ -43,19 +43,35 @@ export async function POST(request: Request) {
 
     // 创建 Creem 结账会话
     // Create Creem checkout session
-    const checkoutResponse = await creem.createCheckout({
-      product_id: variantId.toString(),
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/billing?success=true`,
-      metadata: {
-        userId: user.userId,
-        email: user.email,
-        username: user.username,
-        type
-      }
-    });
-    
-    return NextResponse.json({ checkoutURL: checkoutResponse.checkout_url }, { status: 200 });
-  } catch (error: any) {
+    try {
+      console.log('Environment check:', {
+        hasApiKey: !!process.env.CREEM_API_KEY,
+        environment: process.env.CREEM_ENVIRONMENT,
+        appUrl: process.env.NEXT_PUBLIC_APP_URL
+      });
+      
+      // 创建 Creem 结账会话
+      const checkoutResponse = await creem.createCheckout({
+        product_id: variantId.toString(),
+        success_url: `${process.env.NEXT_PUBLIC_APP_URL}/billing?success=true`,
+        metadata: {
+          userId: user.userId,
+          email: user.email,
+          username: user.username,
+          type
+        }
+      });
+      
+      console.log('Checkout response:', checkoutResponse);
+      return NextResponse.json({ checkoutURL: checkoutResponse.checkout_url }, { status: 200 });
+    } catch (error: any) {
+      console.error('POST request failed:', error);
+      return NextResponse.json({
+        error: "An unexpected error occurred. Please try again later."
+      }, { status: 500 });
+    }
+
+  } catch (error) {
     console.error('POST request failed:', error);
     return NextResponse.json({
       error: "An unexpected error occurred. Please try again later."
