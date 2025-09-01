@@ -5,19 +5,14 @@ import { DashboardShell } from "@/components/dashboard/shell";
 import { subscribeInfo } from "@/components/subscribe/Subscribe";
 import { dashboardConfig } from "@/config/dashboard";
 import { MEMBERSHIP_ROLE_VALUE } from "@/lib/constants";
-import { getUserSubscriptionPlan } from "@/lib/lemonsqueezy/subscription";
+import { getUserCreemSubscriptionPlan } from "@/lib/creem/subscription";
 import { getCurrentUser } from "@/lib/session";
 import { SubScriptionInfo, UserSubscriptionPlan } from "@/types/subscribe";
 import { UserInfo } from "@/types/user";
 
-export const metadata = {
-  title: "Billing",
-  description: "Manage billing and your subscription plan.",
-};
-
 export default async function BillingPage() {
   const user = (await getCurrentUser()) as UserInfo;
-  const subscription: SubScriptionInfo | null = await getUserSubscriptionPlan({
+  const subscription: SubScriptionInfo | null = await getUserCreemSubscriptionPlan({
     userId: user.userId,
   });
 

@@ -1,5 +1,5 @@
 import { DATE_USAGE_KEY_EXPIRE, ROLES_LIMIT, getBoostPackKey, getUserDateUsageKey, getUserTotalUsageKey } from "@/lib/constants";
-import { getUserSubscriptionStatus } from "@/lib/lemonsqueezy/subscriptionFromStorage";
+import { getUserCreemSubscriptionStatus } from "@/lib/creem/subscription";
 import redis from "@/lib/redis";
 import { DateRemaining } from "@/types/usage";
 import { RemainingParams, Role, UserId } from "@/types/user";
@@ -103,7 +103,7 @@ export const getUserDateRemaining = async ({ userId, role }: RemainingParams) =>
   } else {
     // 没传角色，重新请求订阅信息
     // If no role is passed, request subscription information again
-    const subscriptionRes = await getUserSubscriptionStatus({
+    const subscriptionRes = await getUserCreemSubscriptionStatus({
       userId,
     })
     userRole = subscriptionRes.role
@@ -127,7 +127,7 @@ export const getUserDateRemaining = async ({ userId, role }: RemainingParams) =>
 export const checkStatus = async ({ userId }: UserId) => {
   // 获取用户订阅信息（角色、会员到期时间戳）
   // Get user subscription information
-  const subscriptionRes = await getUserSubscriptionStatus({
+  const subscriptionRes = await getUserCreemSubscriptionStatus({
     userId,
   });
 

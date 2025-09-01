@@ -12,6 +12,8 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "commentTranslate.source": "Bing",
   "cSpell.words": [
+    // 移除 "lemonsqueezy"
+    "creem",
     "contentlayer",
     "lemonsqueezy"
   ]

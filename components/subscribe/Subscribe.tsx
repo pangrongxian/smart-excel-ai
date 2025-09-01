@@ -77,9 +77,13 @@ export default function Subscribe({ user }: { user: UserInfo | null }) {
         }
       );
       window.location.href = checkoutURL;
-      // window.open(checkoutURL, "_blank", "noopener, noreferrer");
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      console.error('Subscribe error:', err);
+      if (err.response?.status === 401) {
+        toast.error('登录已过期，请重新登录');
+      } else {
+        toast.error('支付请求失败，请稍后重试');
+      }
     }
   };
   const purchase = async () => {

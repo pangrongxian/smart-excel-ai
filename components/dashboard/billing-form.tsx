@@ -53,11 +53,13 @@ export function BillingForm({
       window.location.href = subscriptionPlan.updatePaymentMethodURL;
     }
   }
+  
   async function upgrade(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoading(!isLoading);
     window.location.href = "/#subscription-card";
   }
+  
   async function cancelSubscription() {
     console.log("cancel subscription", subscriptionPlan);
     if (!subscriptionPlan) {

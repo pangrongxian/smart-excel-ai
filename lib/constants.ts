@@ -41,11 +41,12 @@ export const getBoostPackKey = ({ userId }: UserId) => {
 // Variant keys for subscription types.
 export const SUBSCRIPTION_VARIANT_KEY = 'subscription'
 export const SINGLE_VARIANT_KEY = 'single'
+
 // Variant IDs for different subscription types, to be used in checkouts and webhooks.
 export const VARIANT_IDS_BY_TYPE: VariantIdsByType = {
-  'subscription': process.env.LEMON_SQUEEZY_MEMBERSHIP_MONTHLY_VARIANT_ID || '', // checkouts 请求传参要用string，但是webhook收到的variant_id是number
-  'single': process.env.LEMON_SQUEEZY_MEMBERSHIP_SINGLE_TIME_VARIANT_ID || '',
-}
+  'subscription': process.env.CREEM_MEMBERSHIP_MONTHLY_PRODUCT_ID || '',
+  'single': process.env.CREEM_MEMBERSHIP_SINGLE_PRODUCT_ID || '',
+};
 // Function to generate a cache key for single payment orders.
 export const getSinglePayOrderKey = ({ identifier }: { identifier: string }) => {
   return `single_${identifier}`
