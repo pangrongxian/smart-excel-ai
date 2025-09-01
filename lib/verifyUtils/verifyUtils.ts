@@ -11,11 +11,13 @@ export async function verifyReferer(request: Request) {
 export async function verifyToken(request: Request) {
   const token = request.headers.get('token');
   if (!token) {
+    console.log('No token provided');
     return false;
   }
-  const userId = await redis.get(token) + '';
+  const userId = await redis.get(token);
   if (!userId) {
+    console.log('Token not found in Redis or expired:', token);
     return false;
   }
-  return userId;
+  return userId.toString();
 }

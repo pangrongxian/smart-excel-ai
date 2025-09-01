@@ -1,5 +1,5 @@
 import { ONE_DAY } from "@/lib/constants";
-import { getUserSubscriptionStatus } from "@/lib/lemonsqueezy/subscriptionFromStorage";
+import { getUserCreemSubscriptionStatus } from "@/lib/creem/subscription";
 import prisma from "@/lib/prisma";
 import { UserInfo } from "@/types/user";
 import { Account, NextAuthOptions, TokenSet } from "next-auth";
@@ -57,7 +57,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error('User information could not be saved or retrieved.');
         }
 
-        const planRes = await getUserSubscriptionStatus({ userId: userInfo.userId, defaultUser: userInfo })
+        const planRes = await getUserCreemSubscriptionStatus({ userId: userInfo.userId, defaultUser: userInfo })
         const fullUserInfo = {
           userId: userInfo.userId,
           username: userInfo.username,
@@ -90,7 +90,7 @@ async function upsertUserAndGetInfo(token: JWT, account: Account) {
   const user = await upsertUser(token, account.provider);
   if (!user || !user.userId) return null;
 
-  const subscriptionStatus = await getUserSubscriptionStatus({ userId: user.userId, defaultUser: user });
+  const subscriptionStatus = await getUserCreemSubscriptionStatus({ userId: user.userId, defaultUser: user });
 
   return {
     ...user,
@@ -116,7 +116,7 @@ async function upsertUser(token: JWT, provider: string) {
   return user || null;
 }
 async function getSessionUser(token: ExtendedToken): Promise<UserInfo> {
-  const planRes = await getUserSubscriptionStatus({ userId: token.userId as string });
+  const planRes = await getUserCreemSubscriptionStatus({ userId: token.userId as string });
   return {
     userId: token.userId,
     username: token.username,
