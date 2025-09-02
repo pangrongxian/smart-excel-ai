@@ -22,7 +22,23 @@ const nextConfig = {
     ],
     // SVG 支持配置
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox; img-src 'self' data: blob:;",
+    // 添加本地域名支持
+    domains: ['localhost'],
+  },
+  // 添加静态文件处理
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+        ],
+      },
+    ];
   },
   async redirects() {
     return [
@@ -53,4 +69,5 @@ const nextConfig = {
     return config;
   },
 };
+
 module.exports = withNextIntl(nextConfig);
