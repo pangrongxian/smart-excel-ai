@@ -5,6 +5,7 @@ import { UserInfo } from '@/types/user';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import DropDown from './DropDown';
+import UserAccountHeader from './UserAccountHeader';
 
 interface HeaderProps {
   user?: UserInfo | null;
@@ -39,6 +40,18 @@ export default function Header({ user }: HeaderProps) {
             <div className="w-24">
               <DropDown />
             </div>
+            
+            {/* User Account Section */}
+            {user ? (
+              <UserAccountHeader user={user} />
+            ) : (
+              <Link 
+                href={`/${locale}/login`}
+                className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+              >
+                {t('login')}
+              </Link>
+            )}
           </div>
         </div>
       </div>
