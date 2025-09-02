@@ -1,13 +1,28 @@
 
+const withNextIntl = require('next-intl/plugin')('./i18n.ts');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: process.env.NODE_ENV === "development",
   images: {
-    domains: [
-      "avatars.githubusercontent.com",
-      "weijunext.com",
-      "smartexcel.cc",
+    // 使用新的 remotePatterns 配置替代已弃用的 domains
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'weijunext.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'smartexcel.cc',
+      },
     ],
+    // SVG 支持配置
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   async redirects() {
     return [
@@ -30,4 +45,4 @@ const nextConfig = {
     return config;
   },
 };
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

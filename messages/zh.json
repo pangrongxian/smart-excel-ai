@@ -1,0 +1,59 @@
+{
+  "common": {
+    "language": "语言",
+    "chinese": "中文",
+    "english": "English",
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存",
+    "edit": "编辑",
+    "delete": "删除",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "submit": "提交"
+  },
+  "navigation": {
+    "home": "首页",
+    "dashboard": "仪表板",
+    "billing": "账单",
+    "settings": "设置",
+    "profile": "个人资料",
+    "logout": "退出登录",
+    "login": "登录"
+  },
+  "site": {
+    "title": "Smart Excel",
+    "description": "使用 AI 在几秒钟内生成您需要的 Excel 公式",
+    "keywords": "SmartExcel, ChatGPT, Excel公式, Excel AI, 文心一言, 智谱"
+  },
+  "auth": {
+    "signIn": "登录",
+    "signOut": "退出",
+    "signInWith": "使用 {provider} 登录",
+    "welcome": "欢迎回来",
+    "loginDescription": "选择您的登录方式"
+  },
+  "dashboard": {
+    "title": "仪表板",
+    "welcome": "欢迎使用 Smart Excel",
+    "usage": "使用情况",
+    "remaining": "剩余次数",
+    "upgrade": "升级"
+  },
+  "billing": {
+    "title": "账单管理",
+    "currentPlan": "当前计划",
+    "usage": "使用情况",
+    "upgrade": "升级计划",
+    "manageSubscription": "管理订阅"
+  },
+  "footer": {
+    "copyright": "© 2024 Smart Excel. 保留所有权利。",
+    "privacy": "隐私政策",
+    "terms": "服务条款"
+  }
+}
