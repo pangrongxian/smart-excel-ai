@@ -26,7 +26,7 @@
     "login": "Login"
   },
   "site": {
-    "title": "Smart Excel",
+    "title": "Smart AI",
     "description": "Generate the Excel formulas you need in seconds using AI",
     "keywords": "SmartExcel, ChatGPT, Excel formulas, Excel AI, AI Assistant"
   },
@@ -39,7 +39,7 @@
   },
   "dashboard": {
     "title": "Dashboard",
-    "welcome": "Welcome to Smart Excel",
+    "welcome": "Welcome to Smart AI",
     "usage": "Usage",
     "remaining": "Remaining",
     "upgrade": "Upgrade"
@@ -52,7 +52,7 @@
     "manageSubscription": "Manage Subscription"
   },
   "footer": {
-    "copyright": "© 2024 Smart Excel. All rights reserved.",
+    "copyright": "© 2025 Smart AI. All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service"
   }

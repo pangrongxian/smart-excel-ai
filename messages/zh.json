@@ -26,7 +26,7 @@
     "login": "登录"
   },
   "site": {
-    "title": "Smart Excel",
+    "title": "Smart AI",
     "description": "使用 AI 在几秒钟内生成您需要的 Excel 公式",
     "keywords": "SmartExcel, ChatGPT, Excel公式, Excel AI, 文心一言, 智谱"
   },
@@ -39,7 +39,7 @@
   },
   "dashboard": {
     "title": "仪表板",
-    "welcome": "欢迎使用 Smart Excel",
+    "welcome": "欢迎使用 Smart AI",
     "usage": "使用情况",
     "remaining": "剩余次数",
     "upgrade": "升级"
@@ -52,7 +52,7 @@
     "manageSubscription": "管理订阅"
   },
   "footer": {
-    "copyright": "© 2024 Smart Excel. 保留所有权利。",
+    "copyright": "© 2025 Smart AI. 保留所有权利。",
     "privacy": "隐私政策",
     "terms": "服务条款"
   }
