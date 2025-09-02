@@ -1,0 +1,59 @@
+{
+  "common": {
+    "language": "Language",
+    "chinese": "中文",
+    "english": "English",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit"
+  },
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "billing": "Billing",
+    "settings": "Settings",
+    "profile": "Profile",
+    "logout": "Logout",
+    "login": "Login"
+  },
+  "site": {
+    "title": "Smart Excel",
+    "description": "Generate the Excel formulas you need in seconds using AI",
+    "keywords": "SmartExcel, ChatGPT, Excel formulas, Excel AI, AI Assistant"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signInWith": "Sign in with {provider}",
+    "welcome": "Welcome back",
+    "loginDescription": "Choose your sign in method"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome to Smart Excel",
+    "usage": "Usage",
+    "remaining": "Remaining",
+    "upgrade": "Upgrade"
+  },
+  "billing": {
+    "title": "Billing Management",
+    "currentPlan": "Current Plan",
+    "usage": "Usage",
+    "upgrade": "Upgrade Plan",
+    "manageSubscription": "Manage Subscription"
+  },
+  "footer": {
+    "copyright": "© 2024 Smart Excel. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}

@@ -1,30 +1,50 @@
+'use client';
+
 import { Menu, Transition } from "@headlessui/react";
 import {
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
 } from "@heroicons/react/20/solid";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import { useTranslations } from 'next-intl';
+import { useLanguage } from '@/hooks/useLanguage';
+import { type Locale } from '@/i18n';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export type LanguageType = "中文" | "English";
+const languageNames: Record<Locale, string> = {
+  zh: '中文',
+  en: 'English'
+};
 
-interface DropDownProps {
-  language: LanguageType;
-  setLanguage: (language: LanguageType) => void;
-}
+export default function DropDown() {
+  const t = useTranslations('common');
+  const { locale, locales, changeLanguage } = useLanguage();
+  const [isChanging, setIsChanging] = useState(false);
 
-let languages: LanguageType[] = ["中文", "English"];
+  const handleLanguageChange = async (newLocale: Locale) => {
+    if (newLocale === locale) return;
+    
+    setIsChanging(true);
+    try {
+      await changeLanguage(newLocale);
+    } catch (error) {
+      console.error('Language change failed:', error);
+      setIsChanging(false);
+    }
+  };
 
-export default function DropDown({ language, setLanguage }: DropDownProps) {
   return (
     <Menu as="div" className="relative block text-left w-full">
       <div>
-        <Menu.Button className="inline-flex w-full justify-between items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black">
-          {language}
+        <Menu.Button 
+          className="inline-flex w-full justify-between items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black disabled:opacity-50"
+          disabled={isChanging}
+        >
+          {isChanging ? '切换中...' : languageNames[locale]}
           <ChevronUpIcon
             className="-mr-1 ml-2 h-5 w-5 ui-open:hidden"
             aria-hidden="true"
@@ -47,22 +67,24 @@ export default function DropDown({ language, setLanguage }: DropDownProps) {
       >
         <Menu.Items
           className="absolute left-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-          key={language}
+          key={locale}
         >
           <div className="">
-            {languages.map((languageItem) => (
-              <Menu.Item key={languageItem}>
+            {locales.map((localeItem) => (
+              <Menu.Item key={localeItem}>
                 {({ active }) => (
                   <button
-                    onClick={() => setLanguage(languageItem)}
+                    onClick={() => handleLanguageChange(localeItem)}
+                    disabled={isChanging}
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      language === languageItem ? "bg-gray-200" : "",
+                      locale === localeItem ? "bg-gray-200" : "",
+                      isChanging ? "opacity-50 cursor-not-allowed" : "",
                       "px-4 py-2 text-sm w-full text-left flex items-center space-x-2 justify-between"
                     )}
                   >
-                    <span>{languageItem}</span>
-                    {language === languageItem ? (
+                    <span>{languageNames[localeItem]}</span>
+                    {locale === localeItem ? (
                       <CheckIcon className="w-4 h-4 text-bold" />
                     ) : null}
                   </button>

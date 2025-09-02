@@ -3,6 +3,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { useLanguage } from "@/hooks/useLanguage";
 
 import { UserAvatar } from "@/components/UserAvatar";
 import CrownIcon from "@/components/icons/CrownIcon";
@@ -28,6 +29,8 @@ export default function UserAccountHeader({ user }: UserAccountNavProps) {
   const getMembershipExpire = useCallback(() => {
     return dayjs(user.membershipExpire).format("YYYY-MM-DD HH:mm");
   }, [user.membershipExpire]);
+  
+  const { locale } = useLanguage();
 
   return (
     <>
@@ -72,11 +75,12 @@ export default function UserAccountHeader({ user }: UserAccountNavProps) {
                 </div>
               </div>
               <DropdownMenuSeparator />
+              <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href="/">Home</Link>
+                <Link href={`/${locale}`}>Home</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/billing">Billing</Link>
+                <Link href={`/${locale}/billing`}>Billing</Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -84,7 +88,7 @@ export default function UserAccountHeader({ user }: UserAccountNavProps) {
                 onSelect={(event) => {
                   event.preventDefault();
                   signOut({
-                    callbackUrl: `${window.location.origin}/login`,
+                    callbackUrl: `${window.location.origin}/${locale}/login`,
                   });
                 }}
               >
