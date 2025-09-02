@@ -1,60 +1,29 @@
-'use client';
+import MainHeader from "@/components/MainHeader";
+import UserAccountHeader from "@/components/UserAccountHeader";
+import { UserInfo } from "@/types/user";
 
-import { useLanguage } from '@/hooks/useLanguage';
-import { UserInfo } from '@/types/user';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import DropDown from './DropDown';
-import UserAccountHeader from './UserAccountHeader';
-
-interface HeaderProps {
-  user?: UserInfo | null;
-}
-
-export default function Header({ user }: HeaderProps) {
-  const t = useTranslations('navigation');
-  const { locale } = useLanguage();
-  
+export default function Header({ user }: { user?: UserInfo }) {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo/Brand Section */}
-          <div className="flex items-center space-x-4">
-            <Link 
-              href={`/${locale}`} 
-              className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
-            >
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-black text-white font-bold text-sm">
-                SE
-              </div>
-              <span className="hidden sm:block text-xl font-semibold text-gray-900 tracking-tight">
-                {t('home')}
-              </span>
-            </Link>
-          </div>
-
-          {/* Right Section */}
-          <div className="flex items-center space-x-3">
-            {/* Language Dropdown */}
-            <div className="w-24">
-              <DropDown />
-            </div>
-            
-            {/* User Account Section */}
-            {user ? (
-              <UserAccountHeader user={user} />
-            ) : (
-              <Link 
-                href={`/${locale}/login`}
-                className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-              >
-                {t('login')}
-              </Link>
-            )}
-          </div>
+    <div
+      className="fixed z-10 h-14 w-full border-b bg-white bg-opacity-60 first-letter:shadow-sm"
+      style={{
+        backdropFilter: "saturate(50%) contrast(2) blur(5px)",
+      }}
+    >
+      <header className="flex justify-between items-center w-full mt-1 border-b-1 pb-0 sm:px-4 px-2">
+        <MainHeader />
+        <div>
+          <UserAccountHeader
+            user={{
+              username: user?.username || "",
+              avatar: user?.avatar || "",
+              email: user?.email || "",
+              role: user?.role || 0,
+              membershipExpire: user?.membershipExpire,
+            }}
+          />
         </div>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 }

@@ -1,10 +1,10 @@
 "use client";
 
 import Subscribe from "@/components/subscribe/Subscribe";
+import { useLanguage } from "@/hooks/useLanguage";
 import { UserInfo } from "@/types/user";
 import Link from "next/link";
 import { Toaster } from "react-hot-toast";
-import { useLanguage } from "@/hooks/useLanguage";
 
 interface HomePageProps {
   user: UserInfo | null;
@@ -30,7 +30,7 @@ export default function HomePage({ user }: HomePageProps) {
         {user ? (
           <div className="text-center">
             <p className="text-lg text-gray-700 mb-6">
-              欢迎回来Xxx，{user.username || user.email}！
+              欢迎回来，{user.username || user.email}！
             </p>
             <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
               <h2 className="text-xl font-semibold mb-4 text-gray-800">用户信息</h2>
