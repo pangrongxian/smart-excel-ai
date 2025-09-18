@@ -1,25 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL")
-  directUrl = env("POSTGRES_URL_NON_POOLING")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id               Int      @id @default(autoincrement())
-  userId           String?  @unique
-  username         String?
-  avatar           String?
-  role             Int?
-  platform         String?
-  email            String?
-  subscriptionId   String?
-  customerId       String?
-  variantId        Int?
-  currentPeriodEnd Int?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  username  String
+  email     String   @unique
+  avatar    String?
+  platform  String
+  role      Int      @default(0)
+  membershipExpire Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 关联字段
+  audioRecords AudioRecord[]
+
+  @@map("users")
+}
+
+model AudioRecord {
+  id            String      @id @default(cuid())
+  userId        String?
+  content       String
+  celebrity     String
+  audioUrl      String?
+  duration      Float?
+  status        AudioStatus @default(PENDING)
+  playCount     Int         @default(0)
+  downloadCount Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  // 关联字段
+  user User? @relation(fields: [userId], references: [userId])
+
+  @@map("audio_records")
+}
+
+enum AudioStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+model VoiceTemplate {
+  id           String   @id @default(cuid())
+  name         String   @unique
+  displayName  String
+  avatar       String?
+  description  String?
+  category     String?
+  defaultSpeed Float    @default(1.0)
+  defaultPitch Float    @default(1.0)
+  isActive     Boolean  @default(true)
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("voice_templates")
+}
+
+model AudioGeneration {
+  id        String   @id @default(cuid())
+  userId    String?
+  content   String
+  voiceType String
+  audioUrl  String?
+  duration  Float?
+  isPublic  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("audio_generations")
 }
