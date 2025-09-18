@@ -1,5 +1,5 @@
 import createMiddleware from 'next-intl/middleware';
-import { locales, defaultLocale } from './i18n';
+import { defaultLocale, locales } from './i18n';
 
 export default createMiddleware({
   // 支持的语言列表
@@ -11,6 +11,7 @@ export default createMiddleware({
   // 本地化前缀策略
   localePrefix: 'always'
 });
+
 
 export const config = {
   // 确保排除所有静态资源，包括音频文件
