@@ -20,8 +20,8 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/login",  // 修改这里
-    signOut: '/auth/logout',
+    signIn: "/zh/login",  // 修改为包含语言前缀的路径
+    signOut: '/zh/auth/logout',
   },
   providers: [
     GithubProvider({
@@ -78,6 +78,21 @@ export const authOptions: NextAuthOptions = {
         session.user = await getSessionUser(token);
       }
       return session;
+    },
+    // 添加重定向回调
+    async redirect({ url, baseUrl }) {
+      // 如果是相对路径，添加默认语言前缀
+      if (url.startsWith("/")) {
+        return `${baseUrl}/zh${url === "/" ? "" : url}`;
+      }
+      // 如果是完整URL且是同域名，确保包含语言前缀
+      if (url.startsWith(baseUrl)) {
+        const path = url.replace(baseUrl, "");
+        if (!path.startsWith("/zh") && !path.startsWith("/en")) {
+          return `${baseUrl}/zh${path === "" ? "" : path}`;
+        }
+      }
+      return url;
     }
   },
 }

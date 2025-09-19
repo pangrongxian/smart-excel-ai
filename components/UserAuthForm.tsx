@@ -35,9 +35,9 @@ export function UserAuthForm({ className, user, ...props }: UserAuthFormProps) {
         setIsGoogleLoading(true);
       }
       
-      // 使用完整的URL作为回调地址
+      // 使用包含语言前缀的回调URL
       await signIn(platform, {
-        callbackUrl: "https://smart-excel-ai-three.vercel.app/",
+        callbackUrl: "/zh",  // 修改为包含语言前缀
         redirect: true,
       });
       
