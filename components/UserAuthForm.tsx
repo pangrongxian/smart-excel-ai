@@ -8,6 +8,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { UserInfo } from "@/types/user";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
   user?: UserInfo;
@@ -21,18 +22,34 @@ export function UserAuthForm({ className, user, ...props }: UserAuthFormProps) {
   const login = async (platform: string) => {
     // user已登录，返回首页
     if (user && user.userId) {
+      toast.success("您已登录");
       router.push("/");
       return;
     }
-    if (platform === "github") {
-      setIsGitHubLoading(true);
+    
+    try {
+      if (platform === "github") {
+        setIsGitHubLoading(true);
+      }
+      if (platform === "google") {
+        setIsGoogleLoading(true);
+      }
+      
+      // 修改这里：使用 redirect: true 让 NextAuth 处理重定向
+      await signIn(platform, {
+        callbackUrl: `${window.location.origin}`,
+        redirect: true,
+      });
+      
+      // 由于使用了 redirect: true，以下代码不会执行
+      // 登录成功后 NextAuth 会自动重定向到 callbackUrl
+    } catch (error) {
+      toast.error("登录过程中发生错误，请稍后重试");
+      console.error("登录错误:", error);
+    } finally {
+      setIsGitHubLoading(false);
+      setIsGoogleLoading(false);
     }
-    if (platform === "google") {
-      setIsGoogleLoading(true);
-    }
-    signIn(platform, {
-      callbackUrl: `${window.location.origin}`,
-    });
   };
 
   return (
