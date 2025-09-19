@@ -35,9 +35,9 @@ export function UserAuthForm({ className, user, ...props }: UserAuthFormProps) {
         setIsGoogleLoading(true);
       }
       
-      // 使用 callbackUrl 指定登录成功后的重定向地址
+      // 使用完整的URL作为回调地址
       await signIn(platform, {
-        callbackUrl: "/",
+        callbackUrl: "https://smart-excel-ai-three.vercel.app/",
         redirect: true,
       });
       
