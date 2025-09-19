@@ -114,8 +114,8 @@ export const getUserDateRemaining = async ({ userId, role }: RemainingParams) =>
   const userTodayRemaining = userDateDefaultLimit - userTodayUsage <= 0 ? 0 : userDateDefaultLimit - userTodayUsage
   const boostPackKey = await getBoostPackKey({ userId })
   const boostPackRemaining: number = await redis.get(boostPackKey) || 0
-  // 查询次数是在请求openai前，自增次数是在请求后，这里把查询到的redis剩余次数返回，并传给自增方法，减少redis请求次数
-  // The query for the number of times is before the request to openai, and the increment of the number of times is after the request, here the remaining redis times queried are returned and passed to the increment method, reducing the number of redis requests
+  // 查询次数是在请求AI前，自增次数是在请求后，这里把查询到的redis剩余次数返回，并传给自增方法，减少redis请求次数
+  // The query for the number of times is before the AI request, and the increment of the number of times is after the request, here the remaining redis times queried are returned and passed to the increment method, reducing the number of redis requests
   return {
     userTodayRemaining,
     boostPackRemaining,

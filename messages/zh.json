@@ -28,7 +28,7 @@
   "site": {
     "title": "Smart AI",
     "description": "使用 AI 在几秒钟内生成您需要的 Excel 公式",
-    "keywords": "SmartExcel, ChatGPT, Excel公式, Excel AI, 文心一言, 智谱"
+    "keywords": "SmartExcel, Excel公式, Excel AI, 文心一言, 智谱"
   },
   "auth": {
     "signIn": "登录",

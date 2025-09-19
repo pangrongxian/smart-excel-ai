@@ -6,7 +6,7 @@ const baseSiteConfig = {
   url: "https://smartexcel.cc",
   ogImage: "https://smartexcel.cc/og.jpg",
   metadataBase: new URL("https://www.smartexcel.cc"),
-  keywords: ["SmartExcel", "ChatGPT", "Excel formulas", "Excel AI", "文心一言", "智谱"],
+  keywords: ["SmartExcel", "Excel formulas", "Excel AI", "文心一言", "智谱"],
   authors: [
     {
       name: "weijunext",

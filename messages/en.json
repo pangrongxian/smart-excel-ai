@@ -28,7 +28,7 @@
   "site": {
     "title": "Smart AI",
     "description": "Generate the Excel formulas you need in seconds using AI",
-    "keywords": "SmartExcel, ChatGPT, Excel formulas, Excel AI, AI Assistant"
+    "keywords": "SmartExcel, Excel formulas, Excel AI, AI Assistant"
   },
   "auth": {
     "signIn": "Sign In",

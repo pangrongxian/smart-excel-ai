@@ -8,7 +8,7 @@ Generate the Excel formulas you need in seconds using AI.
 
 ## How it works
 
-This project uses the [ChatGPT API](https://openai.com/api/) and the [Vercel AI SDK](https://sdk.vercel.ai/docs) with streaming. It constructs a prompt based on the form and user input, sends it to the ChatGPT API with a Vercel Edge Function, then streams the response back to the application UI.
+This project uses AI technology and the [Vercel AI SDK](https://sdk.vercel.ai/docs) with streaming. It constructs a prompt based on the form and user input, sends it to the AI service with a Vercel Edge Function, then streams the response back to the application UI.
 
 ## Stack 
 
@@ -18,7 +18,7 @@ SmartExcel is built on the following stack:
 - TailwindCSS – Styles
 - Postgres and Prisma - database and storage([How to use?](https://weijunext.com/article/061d8cd9-fcf3-4d9e-bd33-e257bc4f9989))
 - Next-auth - Authentication([How to use?](https://weijunext.com/article/061d8cd9-fcf3-4d9e-bd33-e257bc4f9989)) 
-- ChatGPT - Generate the Excel formulas
+- AI Service - Generate the Excel formulas
 - Upstash - Redis([How to use?](https://weijunext.com/article/6510121c-90da-4d20-85a1-72cbbdb3983b))
 - Creem - payments (official payment provider)
 - Google Analytics - Analytics([How to use?](https://weijunext.com/article/979b9033-188c-4d88-bfff-6cf74d28420d))
