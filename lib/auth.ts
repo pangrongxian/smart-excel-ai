@@ -100,10 +100,10 @@ async function upsertUserAndGetInfo(token: JWT, account: Account) {
 }
 async function upsertUser(token: JWT, provider: string) {
   const userData = {
-    userId: token.sub,
-    username: token.name,
+    userId: token.sub || '',
+    username: token.name || 'User', // 提供默认值，避免 null
     avatar: token.picture,
-    email: token.email,
+    email: token.email || '', // 提供默认值，避免 null
     platform: provider,
   };
 
