@@ -35,14 +35,12 @@ export function UserAuthForm({ className, user, ...props }: UserAuthFormProps) {
         setIsGoogleLoading(true);
       }
       
-      // 修改这里：使用 redirect: true 让 NextAuth 处理重定向
+      // 使用 callbackUrl 指定登录成功后的重定向地址
       await signIn(platform, {
-        callbackUrl: `${window.location.origin}`,
+        callbackUrl: "/",
         redirect: true,
       });
       
-      // 由于使用了 redirect: true，以下代码不会执行
-      // 登录成功后 NextAuth 会自动重定向到 callbackUrl
     } catch (error) {
       toast.error("登录过程中发生错误，请稍后重试");
       console.error("登录错误:", error);
