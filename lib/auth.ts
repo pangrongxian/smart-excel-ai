@@ -83,6 +83,10 @@ export const authOptions: NextAuthOptions = {
     async redirect({ url, baseUrl }) {
       // 处理相对路径：避免重复添加语言前缀，如 '/zh' 被加成 '/zh/zh'
       if (url.startsWith("/")) {
+        // 对 NextAuth 内部 API 路径保持原样（不可添加语言前缀）
+        if (url.startsWith("/api/auth")) {
+          return `${baseUrl}${url}`;
+        }
         // 根路径，跳转到默认语言首页
         if (url === "/") return `${baseUrl}/zh`;
         // 已带语言前缀的路径，保持不变
@@ -95,6 +99,10 @@ export const authOptions: NextAuthOptions = {
       // 处理同域完整 URL：如果不带语言前缀，补充默认语言
       if (url.startsWith(baseUrl)) {
         const path = url.replace(baseUrl, "");
+        // 对 NextAuth 内部 API 路径保持原样
+        if (path.startsWith("/api/auth")) {
+          return url;
+        }
         if (path.startsWith("/zh") || path.startsWith("/en")) {
           return url;
         }
