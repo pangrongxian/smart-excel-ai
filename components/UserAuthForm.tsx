@@ -8,6 +8,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { UserInfo } from "@/types/user";
 import { useRouter } from "next/navigation";
+import { useLanguage } from "@/hooks/useLanguage";
 import { toast } from "react-hot-toast";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,12 +19,13 @@ export function UserAuthForm({ className, user, ...props }: UserAuthFormProps) {
   const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
   const [isGoogleLoading, setIsGoogleLoading] = React.useState<boolean>(false);
   const router = useRouter();
+  const { locale } = useLanguage();
 
   const login = async (platform: string) => {
     // user已登录，返回首页
     if (user && user.userId) {
       toast.success("您已登录");
-      router.push("/");
+      router.push(`/${locale}`);
       return;
     }
     
@@ -37,7 +39,7 @@ export function UserAuthForm({ className, user, ...props }: UserAuthFormProps) {
       
       // 使用包含语言前缀的回调URL
       await signIn(platform, {
-        callbackUrl: "/zh",  // 修改为包含语言前缀
+        callbackUrl: `/${locale}`,
         redirect: true,
       });
       

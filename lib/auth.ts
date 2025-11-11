@@ -81,25 +81,43 @@ export const authOptions: NextAuthOptions = {
     },
     // 添加重定向回调
     async redirect({ url, baseUrl }) {
-      // 如果是相对路径，添加默认语言前缀
+      // 处理相对路径：避免重复添加语言前缀，如 '/zh' 被加成 '/zh/zh'
       if (url.startsWith("/")) {
-        return `${baseUrl}/zh${url === "/" ? "" : url}`;
+        // 根路径，跳转到默认语言首页
+        if (url === "/") return `${baseUrl}/zh`;
+        // 已带语言前缀的路径，保持不变
+        if (url.startsWith("/zh") || url.startsWith("/en")) {
+          return `${baseUrl}${url}`;
+        }
+        // 无语言前缀的相对路径，补充默认语言
+        return `${baseUrl}/zh${url}`;
       }
-      // 如果是完整URL且是同域名，确保包含语言前缀
+      // 处理同域完整 URL：如果不带语言前缀，补充默认语言
       if (url.startsWith(baseUrl)) {
         const path = url.replace(baseUrl, "");
-        if (!path.startsWith("/zh") && !path.startsWith("/en")) {
-          return `${baseUrl}/zh${path === "" ? "" : path}`;
+        if (path.startsWith("/zh") || path.startsWith("/en")) {
+          return url;
         }
+        return `${baseUrl}/zh${path === "" ? "" : path}`;
       }
+      // 其他域名或外链，保持原样
       return url;
     }
   },
 }
 async function storeAccessToken(accessToken: string, sub?: string) {
   if (!accessToken || !sub) return;
+  // 在本地开发或未配置 Upstash 时，跳过令牌缓存，避免授权流程因网络或配置失败
+  if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+    console.warn('[storeAccessToken] Upstash Redis not configured, skip caching access token');
+    return;
+  }
   const expire = ONE_DAY * 30; // The number of seconds in 30 days
-  await redis.set(accessToken, sub, { ex: expire });
+  try {
+    await redis.set(accessToken, sub, { ex: expire });
+  } catch (err) {
+    console.warn('[storeAccessToken] Failed to cache access token, continue without cache:', err);
+  }
 }
 async function upsertUserAndGetInfo(token: JWT, account: Account) {
   const user = await upsertUser(token, account.provider);
